@@ -9,4 +9,5 @@ class AppAssets {
   static String iron = 'assets/images/iron.png';
   static String paper = 'assets/images/paper.png';
   static String plastic = 'assets/images/plastic.png';
+  static String googleIcon = 'assets/icons/google.svg';
 }

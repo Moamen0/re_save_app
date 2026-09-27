@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:icons_plus/icons_plus.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:re_save_app/config/di.dart';
+import 'package:re_save_app/core/utils/app_assets.dart';
 import 'package:re_save_app/core/utils/app_routes.dart';
 import 'package:re_save_app/core/utils/dialog_utils.dart';
 import 'package:re_save_app/features/ui/auth/login/cubit/login_state.dart';
@@ -144,7 +145,11 @@ class LoginScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Brand(Brands.google),
+                        SvgPicture.asset(
+                          AppAssets.googleIcon,
+                          height: 35.h,
+                          width: 35.w,
+                        ),
                         SizedBox(width: 8.w,),
                         Text('المتابعة عبر جوجل',
                           style: AppStyles.medium18Header,)
