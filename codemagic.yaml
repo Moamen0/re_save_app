@@ -1,7 +1,7 @@
 ```yaml
 workflows:
   sample-workflow:
-    name: Codemagic iOS Build
+    name: iOS Unsigned Build
     max_build_duration: 120
     instance_type: mac_mini_m2
 
@@ -15,12 +15,21 @@ workflows:
         script: |
           flutter pub get
 
-      - name: Build iOS IPA
+      - name: Install CocoaPods
         script: |
-          flutter build ipa --release
+          cd ios
+          pod install
+
+      - name: Build iOS
+        script: |
+          flutter build ios --release --no-codesign
+
+      - name: Create unsigned IPA
+        script: |
+          mkdir -p Payload
+          cp -R build/ios/iphoneos/Runner.app Payload/
+          zip -r Runner.ipa Payload
 
     artifacts:
-      - build/ios/ipa/*.ipa
-      - build/ios/archive/*.xcarchive
-      - /tmp/xcodebuild_logs/*.log
+      - Runner.ipa
 ```
