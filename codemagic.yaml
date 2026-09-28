@@ -1,9 +1,26 @@
+```yaml
 workflows:
+  sample-workflow:
+    name: Codemagic iOS Build
+    max_build_duration: 120
+    instance_type: mac_mini_m2
 
-    sample-workflow:
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
 
-        name: Codemagic Sample Workflow
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
 
-        max_build_duration: 120
+      - name: Build iOS IPA
+        script: |
+          flutter build ipa --release
 
-        instance_type: mac_mini_m2
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - build/ios/archive/*.xcarchive
+      - /tmp/xcodebuild_logs/*.log
+```
